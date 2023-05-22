@@ -1,16 +1,28 @@
-# This is a sample Python script.
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.by import By
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
+class VintedHandler:
+    def __init__(self, username:str, password:str):
+        url = "https://www.vinted.co.uk/"
+        url = "https://www.vinted.co.uk/member/signup/select_type?ref_url=%2F"
+        driver = webdriver.Edge()
+        driver.get(url)
+        element = driver.find_element(By.ID, "onetrust-reject-all-handler")
+        element.click()
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+        time.sleep(1000)
+        driver.close()
+
+def main(user, passw):
+    vh = VintedHandler(user, passw)
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    print_hi('PyCharm')
+    user = "bekah.justice11@gmail.com"
+    passw = "StormTrooper321!"
+    main(user, passw)
 
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
