@@ -1,4 +1,6 @@
+import random
 import time
+import selenium
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
@@ -11,26 +13,32 @@ class VintedHandler:
         url = "https://www.vinted.co.uk/member/signup/select_type?ref_url=%2F"
         driver = webdriver.Edge()
         driver.get(url)
+        self.random_halt()
+
         element = driver.find_element(By.ID, "onetrust-reject-all-handler")
         element.click()
+        self.random_halt()
 
-        time.sleep(1)
         # u-cursor-pointer
         buttons = driver.find_elements(By.CLASS_NAME, "u-cursor-pointer")
         login_button = buttons[1]
         login_button.click()
+        self.random_halt()
 
         buttons = driver.find_elements(By.CLASS_NAME, "u-cursor-pointer")
         email_button = buttons[0]
         email_button.click()
+        self.random_halt()
 
         fields = driver.find_elements(By.CLASS_NAME, "web_ui__Input__value")
         username_field = fields[0]
         username_field.send_keys(username)
+        self.random_halt()
 
         password_field = fields[1]
         password_field.send_keys(password)
-        password_field.submit()
+        self.random_halt()
+        #password_field.submit()
 
         #password_field.send_keys(password)
         # time.sleep(1000)
@@ -48,8 +56,11 @@ class VintedHandler:
         # continue_button.click()
         #
         # wait = WebDriverWait(driver, 10)
-        time.sleep(100)
+        time.sleep(1000)
         driver.close()
+
+    def random_halt(self):
+        time.sleep(random.random()+3)
 
 def main(user, passw):
     vh = VintedHandler(user, passw)
